@@ -1,0 +1,50 @@
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    id 'application'
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    // Use JUnit Jupiter for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.8.2'
+
+    // Dependencies used by the application.
+    implementation 'com.konghq:unirest-java:3.13.10'
+    implementation 'org.json:json:20231013' // أو آخر نسخة متوفرة
+    implementation 'com.sun.speech.freetts:freetts:1.2.2' // مكتبة FreeTTS للتحويل من نص إلى صوت
+    implementation 'com.google.cloud:google-cloud-speech:2.0.0' // مكتبة Google Cloud Speech-to-Text
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13' // إذا كنت تستخدم HttpClient (في بعض الحالات)
+    implementation 'com.google.guava:guava:31.0-jre' // مكتبة Guava (إذا كنت تستخدمها)
+    implementation 'org.openjfx:javafx-controls:21.0.2'
+    implementation 'org.openjfx:javafx-fxml:21.0.2'
+}
+
+javafx {
+    version = "21.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'org.example.App'
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
